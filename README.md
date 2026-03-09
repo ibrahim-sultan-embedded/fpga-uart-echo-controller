@@ -30,3 +30,7 @@ Modules in the design:
 - FSM controller
 - Modular RTL design
 - Simulation testbench
+
+- ## Simulation
+
+![UART Simulation](simulation_uart.png)
