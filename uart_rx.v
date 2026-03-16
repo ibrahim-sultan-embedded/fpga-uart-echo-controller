@@ -17,42 +17,51 @@ localparam DATA  = 2'd2;
 localparam STOP  = 2'd3;
 
 always @(posedge clk or posedge rst) begin
+
     if (rst) begin
         state <= IDLE;
         bit_index <= 0;
         data_reg <= 0;
         rx_done <= 0;
-    end else begin
+    end 
+
+    else begin
+
         rx_done <= 0;
 
         case(state)
 
-        IDLE: begin
-            if (rx == 0) begin
+        IDLE:
+        begin
+            if(rx == 0)
                 state <= START;
-            end
         end
 
-        START: begin
-            if (baud_tick) begin
-                state <= DATA;
+        START:
+        begin
+            if(baud_tick) begin
                 bit_index <= 0;
+                state <= DATA;
             end
         end
 
-        DATA: begin
-            if (baud_tick) begin
+        DATA:
+        begin
+            if(baud_tick) begin
+
                 data_reg[bit_index] <= rx;
-                if (bit_index == 7) begin
+
+                if(bit_index == 7)
                     state <= STOP;
-                end else begin
+                else
                     bit_index <= bit_index + 1;
-                end
+
             end
         end
 
-        STOP: begin
-            if (baud_tick) begin
+        STOP:
+        begin
+            if(baud_tick) begin
                 rx_data <= data_reg;
                 rx_done <= 1;
                 state <= IDLE;
@@ -60,7 +69,9 @@ always @(posedge clk or posedge rst) begin
         end
 
         endcase
+
     end
+
 end
 
 endmodule
