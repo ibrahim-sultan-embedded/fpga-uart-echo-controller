@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
 
 module tb_uart_loopback;
 
@@ -10,10 +10,11 @@ reg [7:0] tx_data;
 
 wire tx;
 wire tx_busy;
+
 wire [7:0] rx_data;
 wire rx_done;
 
-uart_tx tx_inst (
+uart_tx tx_inst(
     .clk(clk),
     .rst(rst),
     .baud_tick(baud_tick),
@@ -23,7 +24,7 @@ uart_tx tx_inst (
     .tx_busy(tx_busy)
 );
 
-uart_rx rx_inst (
+uart_rx rx_inst(
     .clk(clk),
     .rst(rst),
     .baud_tick(baud_tick),
@@ -48,22 +49,26 @@ initial begin
 end
 
 initial begin
+
     rst = 1;
     tx_start = 0;
     tx_data = 8'h00;
 
-    #50;
+    #100
     rst = 0;
 
-    #100;
+    #100
+
     tx_data = 8'hA5;
     tx_start = 1;
 
-    #20;
+    #20
     tx_start = 0;
 
-    #3000;
+    #5000
+
     $finish;
+
 end
 
 endmodule
