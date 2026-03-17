@@ -33,5 +33,4 @@ Modules in the design:
 
 - ## Simulation
 
-![UART Simulation](simulation_uart.png)
 ![UART Simulation](simulation_uart1.png)
